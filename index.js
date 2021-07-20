@@ -28,6 +28,7 @@ async function main() {
     var createReceipt = await createTokenTransaction.getReceipt(client);
     var newTokenId = createReceipt.tokenId;
 
+    // print the token id to string...
     console.log("the new token ID is:", newTokenId.toString());
 }
 
