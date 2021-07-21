@@ -1,7 +1,7 @@
 // setting up client connection...
 require("dotenv").config();
 
-const { Client, AccountId, PrivateKey, TokenCreateTransaction } = require("@hashgraph/sdk");
+const { Client, AccountId, PrivateKey, TokenCreateTransaction, TokenAssociateTransaction } = require("@hashgraph/sdk");
 
 async function main() {
 
@@ -30,6 +30,23 @@ async function main() {
 
     // print the token id to string...
     console.log("the new token ID is:", newTokenId.toString());
+
+    // grab info of 2nd account from dotenv...
+    const account2Id = AccountId.fromString(process.env.ACCOUNT_ID_2);
+    const account2Key = PrivateKey.fromString(process.env.PRIVATE_KEY_2);
+
+    //associate new account with new token...
+    var associateTransaction = await new TokenAssociateTransaction()
+        .setAccountId(account2Id)
+        .setTokenIds([newTokenId])
+        .freezeWith(client)
+        .sign(account2Key)
+
+    var submitAssociateTransaction = await associateTransaction.execute(client);
+    var associateReceipt = await submitAssociateTransaction.getReceipt(client);
+
+    console.log("associate tx receipt ", associateReceipt);
+
 }
 
 main();
