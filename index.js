@@ -1,7 +1,7 @@
 // setting up client connection...
 require("dotenv").config();
 
-const { Client, AccountId, PrivateKey, TokenCreateTransaction, TokenAssociateTransaction } = require("@hashgraph/sdk");
+const { Client, AccountId, PrivateKey, TokenCreateTransaction, TokenAssociateTransaction, TransferTransaction } = require("@hashgraph/sdk");
 
 async function main() {
 
@@ -46,6 +46,17 @@ async function main() {
     var associateReceipt = await submitAssociateTransaction.getReceipt(client);
 
     console.log("associate tx receipt ", associateReceipt);
+
+    // transfer tokens from treasury (operator account) into second account...
+    var transferTransaction = await new TransferTransaction()
+    .addTokenTransfer(newTokenId, operatorId, -10) // deduct 10 tokens from treasury...
+    .addTokenTransfer(newTokenId, account2Id, 10) // increase 10 tokens to second account...
+    .execute(client);
+
+    var transferReceipt = await transferTransaction.getReceipt(client);
+
+    console.log("transfer tx receipt: ", transferReceipt);
+
 
 }
 
