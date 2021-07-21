@@ -1,19 +1,25 @@
 // setting up client connection...
 require("dotenv").config();
 
-const { Client, AccountId, PrivateKey, TokenCreateTransaction, TokenAssociateTransaction, TransferTransaction, AccountBalanceQuery } = require("@hashgraph/sdk");
+const { Client, 
+        AccountId, 
+        PrivateKey, 
+        TokenCreateTransaction, 
+        TokenAssociateTransaction, 
+        TransferTransaction, 
+        AccountBalanceQuery } = require("@hashgraph/sdk");
 
 async function main() {
 
     // dotenv configuration for personal TESTNET account (id, private key)...
-    const operatorKey = PrivateKey.fromString(process.env.PRIVATE_KEY);
-    const operatorId = AccountId.fromString(process.env.ACCOUNT_ID);
+    const treasuryKey = PrivateKey.fromString(process.env.PRIVATE_KEY);
+    const treasuryId = AccountId.fromString(process.env.ACCOUNT_ID);
 
     // defining client for TESTNET...
     let client = Client.forTestnet();
 
     // use specific account info to operate...
-    client.setOperator(operatorId, operatorKey);
+    client.setOperator(treasuryId, treasuryKey);
 
     // create a new HTS token...
     var createTokenTransaction = await new TokenCreateTransaction()
@@ -21,7 +27,7 @@ async function main() {
         .setTokenSymbol("PLX")
         .setDecimals(0)
         .setInitialSupply(10000)
-        .setTreasuryAccountId(operatorId)
+        .setTreasuryAccountId(treasuryId)
         .execute(client);
 
     // get receipt of transaction to retrieve the specific token ID...
@@ -40,16 +46,16 @@ async function main() {
         .setAccountId(account2Id)
         .setTokenIds([newTokenId])
         .freezeWith(client)
-        .sign(account2Key)
+        .sign(account2Key);
 
     var submitAssociateTransaction = await associateTransaction.execute(client);
     var associateReceipt = await submitAssociateTransaction.getReceipt(client);
 
     console.log("associate tx receipt ", associateReceipt);
 
-    // transfer tokens from treasury (operator account) into second account...
+    // transfer tokens from treasury account into second account...
     var transferTransaction = await new TransferTransaction()
-        .addTokenTransfer(newTokenId, operatorId, -10) // deduct 10 tokens from treasury...
+        .addTokenTransfer(newTokenId, treasuryId, -10) // deduct 10 tokens from treasury...
         .addTokenTransfer(newTokenId, account2Id, 10) // increase 10 tokens to second account...
         .execute(client);
 
@@ -59,7 +65,7 @@ async function main() {
 
     // check balance of treasury account...
     var treasuryBalance = await new AccountBalanceQuery()
-        .setAccountId(operatorId)
+        .setAccountId(treasuryId)
         .execute(client);
     console.log("treasury balance is: ", treasuryBalance.tokens.toString());
 
