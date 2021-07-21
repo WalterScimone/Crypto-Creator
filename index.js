@@ -1,7 +1,7 @@
 // setting up client connection...
 require("dotenv").config();
 
-const { Client, AccountId, PrivateKey, TokenCreateTransaction, TokenAssociateTransaction, TransferTransaction } = require("@hashgraph/sdk");
+const { Client, AccountId, PrivateKey, TokenCreateTransaction, TokenAssociateTransaction, TransferTransaction, AccountBalanceQuery } = require("@hashgraph/sdk");
 
 async function main() {
 
@@ -35,7 +35,7 @@ async function main() {
     const account2Id = AccountId.fromString(process.env.ACCOUNT_ID_2);
     const account2Key = PrivateKey.fromString(process.env.PRIVATE_KEY_2);
 
-    //associate new account with new token...
+    // associate new account with new token...
     var associateTransaction = await new TokenAssociateTransaction()
         .setAccountId(account2Id)
         .setTokenIds([newTokenId])
@@ -49,14 +49,25 @@ async function main() {
 
     // transfer tokens from treasury (operator account) into second account...
     var transferTransaction = await new TransferTransaction()
-    .addTokenTransfer(newTokenId, operatorId, -10) // deduct 10 tokens from treasury...
-    .addTokenTransfer(newTokenId, account2Id, 10) // increase 10 tokens to second account...
-    .execute(client);
+        .addTokenTransfer(newTokenId, operatorId, -10) // deduct 10 tokens from treasury...
+        .addTokenTransfer(newTokenId, account2Id, 10) // increase 10 tokens to second account...
+        .execute(client);
 
     var transferReceipt = await transferTransaction.getReceipt(client);
 
     console.log("transfer tx receipt: ", transferReceipt);
 
+    // check balance of treasury account...
+    var treasuryBalance = await new AccountBalanceQuery()
+        .setAccountId(operatorId)
+        .execute(client);
+    console.log("treasury balance is: ", treasuryBalance.tokens.toString());
+
+    // check balance for second account...
+    var secondBalance = await new AccountBalanceQuery()
+        .setAccountId(account2Id)
+        .execute(client);
+    console.log("second account balance is: ", secondBalance.tokens.toString());
 
 }
 
