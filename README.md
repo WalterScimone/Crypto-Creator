@@ -4,7 +4,7 @@
 <p>A back-end application that allows you to create, send, receive, and check balances of a cryptocurrency created by you, powered by the Hedera Token Service (HTS).</p>
 
 
-<h2>Table of Contents 📚<h2>
+<h2>Table of Contents<h2>
   
 * [Installation](#Installation)
 * [About](#about)
@@ -27,5 +27,3 @@ If no errors are encountered, the results of the creation and transactions shoul
 <p>The idea of the app was born with the intent of facilitating the people in creating a Decentralized tokenized economy.<p>
 
 <p>&nbsp</p>
-
-
