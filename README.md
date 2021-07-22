@@ -19,7 +19,7 @@ To test the current functionality follow those steps:</br>
 2) Download the repository</br>
 3) Create a .env file with the ACCOUNT_IDs and PRIVATE_KEYs</br>
 4) Run "npm install" for all the required dependencies</br>
-5) Modify at your pleasure the hard-coded Token Information and mathematics
+5) Modify at your pleasure the hard-coded Token Information and mathematics</br>
 6) Execute the command "node index"</br>
 7) Have fun!  <p>
 If no errors are encountered, the results of the creation and transactions should be visible in the terminal.  <p>
@@ -36,4 +36,4 @@ If no errors are encountered, the results of the creation and transactions shoul
 
 <p>&nbsp</p>
 
-<h4> **Under development...**
+<h4> **Under development...**</h4>
