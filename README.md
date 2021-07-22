@@ -13,12 +13,20 @@
 <h2 id="installation">Installation</h2>
 
 
-<p>As the app is very young and in a pre-alpha state, you will have to manually edit code variables, as well as to create at least two Hedera Testnet Accounts (https://portal.hedera.com/register).</br>
-Once done that, download the repository and create a .env file with the PRIVATE_KEY and ACCOUNT_ID information you retrieved from the Hedera website. </br>
-Lastly, perform a npm install and start the app with the command "node index.js".</br>
+<p>The app is in pre-alpha state.</br>
+To test the current functionality follow those steps:</br>
+1) Create 2 Hedera Testnet Accounts</br>
+2) Download the repository</br>
+3) Create a .env file with the ACCOUNT_IDs and PRIVATE_KEYs</br>
+4) Run "npm install" for all the required dependencies</br>
+5) Modify at your pleasure the hard-coded Token Information and mathematics
+6) Execute the command "node index"</br>
+7) Have fun!  <p>
 If no errors are encountered, the results of the creation and transactions should be visible in the terminal.  <p>
 
 <p>&nbsp</p>
+
+
 
 
 <h2 id="about">About</h2>
@@ -27,3 +35,5 @@ If no errors are encountered, the results of the creation and transactions shoul
 <p>The idea of the app was born with the intent of facilitating the people in creating a Decentralized tokenized economy.<p>
 
 <p>&nbsp</p>
+
+<h4> **Under development...**
