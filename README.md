@@ -15,7 +15,7 @@
 
 <p>The app is in pre-alpha state.</br>
 To test the current functionality follow those steps:</br>
-1) Create 2 Hedera Testnet Accounts</br>
+1) Create 2 Hedera Testnet Accounts(https://portal.hedera.com/register)</br>
 2) Download the repository</br>
 3) Create a .env file with the ACCOUNT_IDs and PRIVATE_KEYs</br>
 4) Run "npm install" for all the required dependencies</br>
