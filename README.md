@@ -13,14 +13,13 @@
 <h2 id="installation">Installation</h2>
 
 
-<p>The app is in pre-alpha state.</br>
+<p>The app is under development...</br>
 To test the current functionality follow those steps:</br>
 1) Create 2 Hedera Testnet Accounts(https://portal.hedera.com/register)</br>
 2) Download the repository</br>
 3) Create a .env file with the ACCOUNT_IDs and PRIVATE_KEYs</br>
 4) Run "npm install" for all the required dependencies</br>
-5) Modify at your pleasure the hard-coded Token Information and mathematics</br>
-6) Execute the command "node index"</br>
+5) Execute the command "node index" to trigger the inquirer and insert Cryptocurrency data</br>
 7) Have fun!  <p>
 If no errors are encountered, the results of the creation and transactions should be visible in the terminal.  <p>
 
