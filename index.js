@@ -68,8 +68,8 @@ async function createToken() {
             const txReceipt = await response.getReceipt(client);
 
             let tokenNumber = txReceipt.tokenId;
-
-            console.log("token ID is: ", "0.0.", tokenNumber.num.toNumber())
+            console.log("Congratulations! You just created a cryptocurrency powered by Hedera Hashgraph.");
+            console.log("token ID is: ", "0.0.", tokenNumber.num.toNumber());
             console.log("token name is: ", answers.tokenName);
             console.log("token symbol is: ", answers.tokenSymbol);
             console.log("Token initial supply is: ", answers.initialSupply);
